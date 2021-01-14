@@ -1,0 +1,24 @@
+version: '2.4'
+services:
+
+
+  ikea-stock-site:
+    container_name: ikea-stock-site
+    restart: always
+    image: ljakel/minnich:ikea-stock-site
+    build:
+      context: ./
+      dockerfile: ./docker/ikea-stock-site/Dockerfile
+    ports:
+      - '8081:80'
+
+
+  ikea-api:
+    container_name: ikea-api
+    restart: always
+    image: ljakel/minnich:ikea-api
+    build:
+      context: ./
+      dockerfile: docker/ikea-api/Dockerfile
+    ports:
+      - '4001:4000'

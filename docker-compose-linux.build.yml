@@ -1,0 +1,16 @@
+version: '2.4'
+services:
+
+
+  ikea-stock-site:
+    image: ljakel/minnich:ikea-stock-site
+    build:
+      context: ./
+      dockerfile: ./docker/ikea-stock-site/Dockerfile
+
+
+  ikea-api:
+    image: ljakel/minnich:ikea-api
+    build:
+      context: ./
+      dockerfile: docker/ikea-api/Dockerfile

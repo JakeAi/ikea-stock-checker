@@ -25,7 +25,21 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+
+
+    "ng-build-all": "npm run ng-build-ikea-stock-site && npm run ng-build-api",
+
+    "ng-build-ikea-stock-site": "nx build ikea-stock-site --prod",
+    "ng-build-api": "nx build api --prod",
+
+    "docker-build-ikea-stock-site": "npm run ng-build-ikea-stock-site && docker-compose -f docker-compose-linux.build.yml build ikea-stock-site",
+    "docker-build-api": "npm run ng-build-api && docker-compose -f docker-compose-linux.build.yml build api",
+    "docker-build-all": "npm run docker-build-linux",
+    "docker-build-linux": "\"\"C:\\Program Files\\Docker\\Docker\\DockerCli.exe\"\" -SwitchLinuxEngine && docker-compose -f docker-compose-linux.build.yml build",
+    "docker-push-linux": "\"\"C:\\Program Files\\Docker\\Docker\\DockerCli.exe\"\" -SwitchLinuxEngine && docker-compose -f docker-compose-linux.yml push",
+    "docker-push-all": "npm run docker-push-linux",
+    "ngBuildAndPush": "npm run ng-build-all && npm run docker-build-all && npm run docker-push-all"
   },
   "private": true,
   "dependencies": {
