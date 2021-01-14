@@ -26,17 +26,29 @@
             <th>Product SKU</th>
             <th>Product Name</th>
             <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
             <th>In Stock</th>
             <th>Restock Date</th>
             <th *ngFor='let forecast of store[0]?.forecast'>{{forecast.date|date:'shortDate'}}</th>
           </tr>
           </thead>
           <tbody>
+          <tr>
+            <td colspan='4'></td>
+            <td>Total Items: {{getTotalItems()}}</td>
+            <td>Total Price: {{getTotal()|currency}}</td>
+            <td colspan='10'></td>
+          </tr>
           <tr *ngFor='let t of store | filter:search'>
             <td><img [src]="t.extraData.mainImage.url + '?f=s'" width='50' alt=''></td>
             <td>{{t.productId}}</td>
             <td>{{t.extraData.name}} {{t.extraData.typeName}}</td>
-            <td>{{t.extraData.price}}
+            <td>{{t.extraData.price}}</td>
+            <td>
+              <input type='text' class='form-control' [(ngModel)]='t.quantity'>
+            </td>
+            <td>{{t.quantity * t.extraData.priceNumeral | currency}}</td>
             <td>{{t.stock}}
               <ng-container [ngSwitch]='t.probability'>
                 <span *ngSwitchCase='"HIGH"'><i class='bi text-success bi-caret-up-fill'></i></span>
@@ -56,6 +68,14 @@
             </td>
           </tr>
           </tbody>
+          <tfoot>
+          <tr>
+            <td colspan='4'></td>
+            <td>Total Items: {{getTotalItems()}}</td>
+            <td>Total Price: {{getTotal()|currency}}</td>
+            <td colspan='10'></td>
+          </tr>
+          </tfoot>
         </table>
       </div>
     </div>
