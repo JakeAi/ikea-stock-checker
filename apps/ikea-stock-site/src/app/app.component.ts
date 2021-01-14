@@ -50,7 +50,7 @@ export class AppComponent {
   fetch() {
 
     const matches = [];
-    const regex = /[A-Z]{0,1}[0-9]{6,}/gmi;
+    const regex = /[0-9]{8,}/gmi;
     let m;
 
     while ((m = regex.exec(this.skuList)) !== null) {

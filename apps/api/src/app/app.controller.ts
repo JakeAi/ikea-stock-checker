@@ -13,8 +13,6 @@ export class AppController {
     @Body('store') store: any
   ) {
     try {
-
-
       const lastThree = body.split('').slice(body.length - 3, body.length).join('');
       const extraData = await axios.get(`https://www.ikea.com/us/en/products/${lastThree}/${body}.json`);
       const result = await checker.availability(store.buCode, body);
