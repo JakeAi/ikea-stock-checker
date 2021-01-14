@@ -71,7 +71,7 @@ export class AppComponent {
     this.store.length = 0;
 
     let m;
-    const regex = /\s*(\d+)\s*([^\$]+)\$([^\s]+)\s*([^\s]+)\s*\$([^\s]+)/gm;
+    const regex = /\s*([\d]{6,})\s*([^\$]+)\$([^\s]+)\s*([^\s]+)\s*\$([^\s]+)/gm;
 
     while ((m = regex.exec(this.skuList)) !== null) {
       if (m.index === regex.lastIndex) { regex.lastIndex++; }
