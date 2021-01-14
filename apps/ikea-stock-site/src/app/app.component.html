@@ -2,18 +2,22 @@
 
 <div class='container-fluid'>
   <div class='row'>
-    <div class='col-2'>
+    <div class='col-md-2'>
       <div class='form-group'>
         <label for=''>Store</label>
         <select name='' [(ngModel)]='selectedStore' id='' class='form-control'>
           <option value='' [ngValue]='store' *ngFor='let store of stores'> {{store.name}}</option>
         </select>
       </div>
-      <label for=''>Enter one SKU per line</label>
-      <textarea name='' id='' cols='30' rows='10' class='form-control' [(ngModel)]='skuList'></textarea>
-      <button class='btn btn-primary' (click)='fetch()'>Load</button>
+      <div class='form-group'>
+        <label for=''>Enter one SKU per line</label>
+        <textarea name='' id='' cols='30' rows='10' class='form-control' [(ngModel)]='skuList'></textarea>
+      </div>
+      <div class='form-group'>
+        <button class='btn btn-primary' (click)='fetch()'>Load</button>
+      </div>
     </div>
-    <div class='col'>
+    <div class='col-md-10'>
       <div class='form-group'>
         <label for=''>Search Results</label>
         <input type='text' [(ngModel)]='search' class='form-control'>

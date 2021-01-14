@@ -26,13 +26,9 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-
-
     "ng-build-all": "npm run ng-build-ikea-stock-site && npm run ng-build-api",
-
     "ng-build-ikea-stock-site": "nx build ikea-stock-site --prod",
     "ng-build-api": "nx build api --prod",
-
     "docker-build-ikea-stock-site": "npm run ng-build-ikea-stock-site && docker-compose -f docker-compose-linux.build.yml build ikea-stock-site",
     "docker-build-api": "npm run ng-build-api && docker-compose -f docker-compose-linux.build.yml build ikea-api",
     "docker-build-all": "npm run docker-build-linux",
