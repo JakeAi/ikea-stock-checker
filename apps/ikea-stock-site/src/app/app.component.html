@@ -40,7 +40,7 @@
             <td>Total Price: {{getTotal()|currency}}</td>
             <td colspan='10'></td>
           </tr>
-          <tr *ngFor='let t of store | filter:search'>
+          <tr *ngFor='let t of store | deepFilter:search:["catalogRefs"]'>
             <td><img [src]="t.extraData.mainImage.url + '?f=s'" width='50' alt=''></td>
             <td>{{t.productId}}</td>
             <td>{{t.extraData.name}} {{t.extraData.typeName}}</td>

@@ -1,0 +1,15 @@
+.git
+node_modules
+platforms
+.idea
+
+apps/mm-inventory/node_modules
+apps/mm-inventory/platforms
+apps/mm-inventory/src
+apps/nativescript-monitor-v2/node_modules
+apps/nativescript-monitor-v2/platforms
+apps/nativescript-monitor-v2/src
+
+
+hooks
+tools
