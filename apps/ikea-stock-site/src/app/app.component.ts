@@ -43,6 +43,7 @@ export class AppComponent {
   ];
   public selectedStore = this.stores[0];
   public skuList = '20265438';
+  public search = '';
 
   constructor(private http: HttpClient) { }
 
