@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "projects": {
+    "ikea-stock-site": {
+      "projectType": "application",
+      "root": "apps/ikea-stock-site",
+      "sourceRoot": "apps/ikea-stock-site/src",
+      "prefix": "ikea-stock",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ikea-stock-site",
+            "index": "apps/ikea-stock-site/src/index.html",
+            "main": "apps/ikea-stock-site/src/main.ts",
+            "polyfills": "apps/ikea-stock-site/src/polyfills.ts",
+            "tsConfig": "apps/ikea-stock-site/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/ikea-stock-site/src/favicon.ico",
+              "apps/ikea-stock-site/src/assets"
+            ],
+            "styles": ["apps/ikea-stock-site/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ikea-stock-site/src/environments/environment.ts",
+                  "with": "apps/ikea-stock-site/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ikea-stock-site:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ikea-stock-site:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ikea-stock-site:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/ikea-stock-site/src/**/*.ts",
+              "apps/ikea-stock-site/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/ikea-stock-site"],
+          "options": {
+            "jestConfig": "apps/ikea-stock-site/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ikea-stock-site-e2e": {
+      "root": "apps/ikea-stock-site-e2e",
+      "sourceRoot": "apps/ikea-stock-site-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ikea-stock-site-e2e/cypress.json",
+            "tsConfig": "apps/ikea-stock-site-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ikea-stock-site:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ikea-stock-site:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/ikea-stock-site-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "ikea-stock-site"
+}
