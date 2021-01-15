@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExtraData } from './interface';
-import { concat } from 'rxjs';
 
 
 interface Store {
@@ -37,6 +36,7 @@ interface Todo {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  public isLoading: boolean = false;
   store: Todo[] = [];
   public stores = [
     { buCode: '511', name: 'OH, Columbus', coordinates: [-82.998794, 39.961176], countryCode: 'us' },
@@ -62,11 +62,12 @@ export class AppComponent {
 
   getTotalItems() {
     let total = 0;
-    this.store.forEach(item => total += item.quantity);
+    this.store.forEach(item => total += +item.quantity);
     return total;
   }
 
   fetch() {
+    this.isLoading = true;
     this.input.length = 0;
     this.store.length = 0;
 
@@ -94,14 +95,13 @@ export class AppComponent {
       }
     }
     const promises = [];
-    this.input.forEach(line => promises.push(this.http.post<Todo>('/api/todos', { data: line.productId, store: this.selectedStore })));
-    concat(...promises).subscribe((data: Todo) => {
-      if (data?.productId) {
-        data.quantity = this.getQuantity(data.productId);
-        this.store.push(data);
-        this.store.sort((a, b) => (a.stock < b.stock) ? 1 : -1);
-      }
-    });
+
+    this.http.post<Todo[]>('/api/todos', { data: this.input, store: this.selectedStore })
+      .subscribe(data => {
+        this.isLoading = false;
+        return this.store = data;
+      });
+
   }
 
 

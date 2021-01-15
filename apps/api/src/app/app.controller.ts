@@ -9,18 +9,21 @@ export class AppController {
 
   @Post('todos')
   async getData(
-    @Body('data') body: string,
+    @Body('data') input: { productId: string, quantity: number }[],
     @Body('store') store: any
   ) {
-    try {
-      const lastThree = body.split('').slice(body.length - 3, body.length).join('');
-      const extraData = await axios.get(`https://www.ikea.com/us/en/products/${lastThree}/${body}.json`);
-      const result = await checker.availability(store.buCode, body);
+    const data = [];
+    for (const body of input) {
+      const { productId, quantity } = body;
+      const lastThree = productId.split('').slice(productId.length - 3, productId.length).join('');
+      const extraData = await axios.get(`https://www.ikea.com/us/en/products/${lastThree}/${productId}.json`);
+      const result = await checker.availability(store.buCode, productId);
       result.extraData = extraData.data;
-      return result;
-    } catch (e) {
-      console.log('failed', body);
+      result.quantity = quantity;
+      data.push(result);
     }
+    data.sort((a, b) => (a.stock < b.stock) ? 1 : -1);
+    return data;
   }
 
 }
