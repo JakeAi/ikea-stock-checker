@@ -48,7 +48,10 @@ export class AppComponent {
 
   public input: { productId: string, quantity: number }[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.skuList = localStorage.getItem('ikea-stock-input');
+    this.store = JSON.parse(localStorage.getItem('ikea-stock-results')) || [];
+  }
 
   getQuantity(productId): number {
     return this.input.find(item => item.productId === productId).quantity;
@@ -67,6 +70,7 @@ export class AppComponent {
   }
 
   fetch() {
+    localStorage.setItem('ikea-stock-input', this.skuList);
     this.isLoading = true;
     this.input.length = 0;
     this.store.length = 0;
@@ -99,6 +103,7 @@ export class AppComponent {
     this.http.post<Todo[]>('/api/todos', { data: this.input, store: this.selectedStore })
       .subscribe(data => {
         this.isLoading = false;
+        localStorage.setItem('ikea-stock-results', JSON.stringify(data));
         return this.store = data;
       });
 
