@@ -45,10 +45,18 @@
             <td>Total Price: {{getTotal()|currency}}</td>
             <td colspan='10'></td>
           </tr>
-          <tr *ngFor='let t of store | deepFilter:search:["catalogRefs"]'>
-            <td><img [src]="t.extraData.mainImage.url + '?f=s'" width='50' alt=''></td>
+          <tr *ngFor='let t of store | deepFilter:search:["catalogRefs","forecast", "restockDate","revampPrice"]'>
+            <td>
+              <a [href]='t.extraData.mainImage.url' target='_blank'>
+                <img [src]="t.extraData.mainImage.url + '?f=s'" width='50' alt=''>
+              </a>
+            </td>
             <td>{{t.productId}}</td>
-            <td>{{t.extraData.name}} {{t.extraData.typeName}}</td>
+            <td>
+              <a [href]='t.extraData.pipUrl' target='_blank'>
+                {{t.extraData.mainImage.alt}}
+              </a>
+            </td>
             <td>{{t.extraData.price}}</td>
             <td>
               <input type='text' class='form-control' [(ngModel)]='t.quantity'>
@@ -87,6 +95,10 @@
   </div>
 </div>
 <style>
+  td, th {
+    white-space: nowrap;
+  }
+
   td:first-child {
     padding: 5px;
   }

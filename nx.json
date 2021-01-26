@@ -21,6 +21,8 @@
       "tags": [],
       "implicitDependencies": ["ikea-stock-site"]
     },
-    "api": { "tags": [] }
+    "api": { "tags": [] },
+    "data": { "tags": [] },
+    "ui": { "tags": [] }
   }
 }

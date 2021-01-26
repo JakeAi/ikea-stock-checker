@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExtraData } from './interface';
+import { data } from '@ikea-stock/data';
 
 
 interface Store {
@@ -51,6 +52,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {
     this.skuList = localStorage.getItem('ikea-stock-input');
     this.store = JSON.parse(localStorage.getItem('ikea-stock-results')) || [];
+    data();
   }
 
   getQuantity(productId): number {
